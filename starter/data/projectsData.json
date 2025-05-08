@@ -5,7 +5,7 @@
     "short_description": "Showcase your skills and projects.",
     "long_description": "Build a website to highlight your programming abilities, experience, and portfolio. This is a great way to showcase your work to potential employers.",
     "card_image": "../images/personal_site_card.webp",
-    "spotlight_image": "../images/personal_site_spotlight.webp",
+    "spotlight_image": "../images/blog_spotlight.webp",
     "url": "https://example.com/project1"
   },
   {
