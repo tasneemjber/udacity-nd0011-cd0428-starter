@@ -1,4 +1,4 @@
-fetch('./starter/projectsData.json')
+fetch('./starter/data/projectsData.json')
     .then(response => response.json())
     .then(data => {
         const projectList = document.getElementById('projectList');
@@ -7,24 +7,23 @@ fetch('./starter/projectsData.json')
         let currentIndex = 0;
 
         function renderProjects() {
-            // Clear the existing project cards
             projectList.innerHTML = '';
             data.forEach(project => {
                 const card = document.createElement('div');
                 card.classList.add('projectCard');
-                card.id = project.project_id;  // Make sure the id matches the project id
-                card.style.background = `url('${project.card_image || '../images/default_image.webp'}') center/cover no-repeat`;  // Fallback to default image
+                if (project.project_id === data[currentIndex].project_id) {
+                    card.classList.add('active'); 
+                }
+                card.id = project.project_id;
+                card.style.background = `url('${project.card_image || '/starter/images/default_image.webp'}') center/cover no-repeat`;
                 card.innerHTML = `
                     <h3>${project.project_name}</h3>
                     <p>${project.short_description || 'No short description available'}</p>
                 `;
-                
-                // Add click event for each project card
                 card.addEventListener('click', () => {
                     currentIndex = data.findIndex(p => p.project_id === project.project_id);
                     updateSpotlight(data[currentIndex]);
                 });
-
                 projectList.appendChild(card);
             });
         }
@@ -35,14 +34,20 @@ fetch('./starter/projectsData.json')
                 <p>${project.long_description || 'No description available'}</p>
                 <a href="${project.url || '#'}" target="_blank">View Project</a>
             `;
-            spotlightContainer.style.background = `url('${project.spotlight_image || '../images/default_spotlight.webp'}') center/cover no-repeat`;
+            spotlightContainer.style.background = `url('${project.spotlight_image || '/starter/images/default_spotlight.webp'}') center/cover no-repeat`;
+
+            // تمرير الكارد النشط في القائمة الجانبية
+            const activeCard = document.getElementById(project.project_id);
+            if (activeCard) {
+                activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            renderProjects(); 
         }
 
-        // Initialize with the first project in the array
         renderProjects();
         updateSpotlight(data[0]);
 
-        // Handle arrow navigation for scrolling through projects
         const leftArrow = document.querySelector('.arrow-left');
         const rightArrow = document.querySelector('.arrow-right');
 
@@ -58,7 +63,8 @@ fetch('./starter/projectsData.json')
     })
     .catch(error => console.error('Error loading project data:', error));
 
-// Form validation and character count
+
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const invalidCharsRegex = /[^a-zA-Z0-9@._\- ]/;
 const emailInput = document.getElementById('contactEmail');
@@ -116,4 +122,3 @@ form.addEventListener('submit', (e) => {
         charactersLeft.textContent = `Characters: 0/${MAX_MESSAGE_LENGTH}`;
     }
 });
-

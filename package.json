@@ -1,0 +1,21 @@
+{
+  "name": "nd0011-cd0428-starter",
+  "version": "1.0.0",
+  "description": "## Getting Started",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tasneemjber/udacity-nd0011-cd0428-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tasneemjber/udacity-nd0011-cd0428-starter/issues"
+  },
+  "homepage": "https://github.com/tasneemjber/udacity-nd0011-cd0428-starter#readme"
+}
